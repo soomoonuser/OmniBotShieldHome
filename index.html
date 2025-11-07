@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja Automática - Fazer Pedido</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 15px;
+      max-width: 500px;
+      margin: auto;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px;
+      margin-top: 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    small {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>📦 Fazer Pedido</h2>
+  
+  <form id="pedidoForm">
+    <label>👤 Nome Completo:</label>
+    <input type="text" name="nome" placeholder="Seu nome" required>
+
+    <label>📱 Contato (WhatsApp ou Email):</label>
+    <input type="text" name="contato" placeholder="+55 (xx) xxxxx-xxxx" required>
+
+    <label>🛒 Produto:</label>
+    <input type="text" name="produto" placeholder="Ex: Seguidores TikTok 1k" required>
+
+    <label>🔢 Quantidade:</label>
+    <input type="number" name="quantidade" min="1" required>
+
+    <label>💳 Forma de Pagamento:</label>
+    <select name="pagamento" required>
+      <option value="">Selecione...</option>
+      <option>Pix</option>
+      <option>Cartão</option>
+      <option>PicPay</option>
+      <option>Outro</option>
+    </select>
+
+    <label>💬 Observações (opcional):</label>
+    <textarea name="mensagem" rows="3" placeholder="Algum detalhe sobre o pedido..."></textarea>
+
+    <button type="submit">Enviar Pedido ✅</button>
+    <small>Após enviar, aguarde nosso retorno pelo WhatsApp.</small>
+  </form>
+</div>
+
+<!-- Importa o EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function() {
+    emailjs.init("_r5Nui4-nlkMMWajo"); // 🧠 sua Public Key
+  })();
+
+  document.getElementById("pedidoForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.sendForm("service_p0icp32", "template_7m7p6ve", this) // 🧠 troque pelo seu Service ID e Template ID
+      .then(() => {
+        alert("✅ Pedido enviado com sucesso! Entraremos em contato em breve.");
+        document.getElementById("pedidoForm").reset();
+      }, (error) => {
+        alert("❌ Erro ao enviar pedido. Verifique sua conexão ou tente novamente.\n\nDetalhes: " + JSON.stringify(error));
+      });
+  });
+</script>
+
+</body>
+</html>
