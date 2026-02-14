@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annihilator - Protocolo de Aniquilação de IP</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Canvas para o efeito de partículas de fundo -->
+    <canvas id="particle-canvas"></canvas>
+
+    <header>
+        <div class="banner-container">
+            <h1>ANNIHILATOR PROTOCOL</h1>
+            <p>Destrua as Defesas. Quebre as Conexões.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="info-section">
+            <h2>Bem-vindo à Zona de Operações</h2>
+            <p>Este portal é projetado para desestabilizar alvos de rede específicos com precisão implacável. Utilize com intenção e conhecimento.</p>
+            <div class="bubble-photos">
+                <img src="https://via.placeholder.com/150/6600cc/FFFFFF?text=Target_Online" alt="Target Online Bubble" class="bubble">
+                <img src="https://via.placeholder.com/150/9933ff/FFFFFF?text=Network_Op" alt="Network Operator Bubble" class="bubble">
+                <img src="https://via.placeholder.com/150/4d0099/FFFFFF?text=Exploit_Dev" alt="Exploit Developer Bubble" class="bubble">
+            </div>
+        </section>
+
+        <section class="attack-section">
+            <h2>Iniciar Protocolo de Aniquilação de IP</h2>
+            <div class="input-group">
+                <label for="targetIp">Alvo IP/URL:</label>
+                <input type="text" id="targetIp" placeholder="Ex: 192.168.1.1 ou exemplo.com">
+            </div>
+            <div class="input-group">
+                <label for="requestsPerSecond">Requisições/Segundo (max 1000):</label>
+                <input type="number" id="requestsPerSecond" value="100" min="1" max="1000">
+            </div>
+            <button id="startAttackBtn" class="action-button">Iniciar Ataque</button>
+            <button id="stopAttackBtn" class="action-button stop-button" disabled>Parar Ataque</button>
+            <p id="statusMessage" class="status-message">Aguardando comando...</p>
+            <p class="warning-message">
+                **AVISO CRÍTICO:** Esta ferramenta envia requisições de rede reais ao alvo especificado. O uso de tais métodos para perturbar ou danificar sistemas sem permissão é ilegal e pode acarretar em sérias consequências legais. Utilize esta ferramenta apenas para testes autorizados em seus próprios sistemas. A Organização Secret Company e o GOD-AI não se responsabilizam por qualquer uso indevido ou ilegal desta ferramenta pelo usuário.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Annihilator Protocol. Desenvolvido pela Organização Secret Company.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
